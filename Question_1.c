@@ -48,11 +48,6 @@ int isFull(Channel_Stack *stack)
     return stack->top == stack->capacity - 1;
 }
 
-int isEmpty(Channel_Stack *stack)
-{
-    return stack->top == -1;
-}
-
 void push(Channel_Stack *stack, char item)
 {
     if (isFull(stack))
@@ -60,12 +55,6 @@ void push(Channel_Stack *stack, char item)
     stack->char_array[++stack->top] = item;
 }
 
-char pop(Channel_Stack *stack)
-{
-    if (isEmpty(stack))
-        return;
-    return stack->char_array[stack->top--];
-}
 
 typedef struct
 {
@@ -138,3 +127,6 @@ void read_channel(Channel_Stack *stack)
         }
     }
 }
+
+//Geek for Geek reference for Stack used for implementing Stack
+//https://www.geeksforgeeks.org/introduction-to-stack-data-structure-and-algorithm-tutorials/
