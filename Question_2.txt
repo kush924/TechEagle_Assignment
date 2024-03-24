@@ -1,0 +1,40 @@
+/*  
+*   LEDControl() -> disables the global interrupts for 1400us
+*   Delay() function, implements a delay immediately after the LEDControl()
+*   InterruptServiceRoutine() executes every time a new byte is received into the UART buffer.
+*   UART buffer on the hardware is a single depth buffer
+*   serial bytes in a message are contiguous and have 8-N-1 format
+*/
+
+
+Sol => 
+
+        The Time taken by LEDControl function(disabling Interrupts) is 1400us.
+        When entering the LEDControl function the UART buffer must be completely 
+        empty or just at the verge of completing the reception of one data frame
+        (taking the worst case senerio).
+
+        when the LEDControl function is about to end(enabling Interrupts), and 
+        taking the worst case senerio above, we can receive that initial data frame
+        in the buffer(at the start of LEDControl) t = 0, then receive another data
+        frame in the next depth of the buffer t = t_frame, then just moments(neglegible)
+        after finishing LEDControl, we can receive a new data frame again hence at
+        t = 2 * t_frame = 1400us.
+
+        The Serial Bytes are of 8-N-1 format hence the number of bits transfered for
+        each byte of data is 10(one stop and one receive bits) 1+8+1. The data is
+        contiguous hence there is no idle bits/time between each data frame, hence
+        stop bit is followed by the start bit of the next data frame.
+
+        Hence t_frame = 10 * t_bit
+
+    from above Equations:
+        20 * t_bit = 1400us
+    hence
+        t_bit = 70us
+
+    Baudrate = gross bit rate, The symbols used are simple binary hence
+    Baudrate = bits per second
+
+        Baudrate = 1 / t_bit = 14285.71
+        MAX_Baudrate(theoretical) = 14285

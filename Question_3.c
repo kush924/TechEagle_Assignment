@@ -6,7 +6,7 @@
 
 int main()
 {
-    double x = 0, y = 0, r = 1, q_deg = 0, qf_deg = 90; //
+    double x = 0, y = 0, r = 1, q_deg = 0, qf_deg = 90; 
     double q_rad = q_deg * (pi / 180.0);
     double qf_rad = qf_deg * (pi / 180.0);
     double step_size_rad = step_size_deg * (pi / 180.0);
@@ -29,7 +29,7 @@ int main()
         double x2 = r * cos(q_rad);
         double y2 = y + (x2 - x) * tan((-root3 * x + y) / (x + root3 * y));
         y = y2;x = x2;
-        r = sqrt(x * x + y * y);
+        r = sqrt(x * x + y * y);            //
         fprintf(fptr, "%f,%f\n", x, y);
     }
 
@@ -40,3 +40,6 @@ int main()
 
 // tan((-root3 * x + y) / (x + root3 * y))
 // tan(tan(120 * (pi / 180.0) + q_rad))
+
+// link to Google Sheets Doc with the Graph Plotted
+//https://docs.google.com/spreadsheets/d/1k6YNM3yNmtjB-AvCytCXnrWozThflRtGws3CbPaULDE/edit?usp=sharing
